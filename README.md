@@ -5,6 +5,8 @@ This is a [Next.js](https://github.com/expo/expo) + [Gluestack-ui](https://ui.gl
 First, run the development server:
 
 ```bash
+
+
 # For web
 yarn web
 # For ios
