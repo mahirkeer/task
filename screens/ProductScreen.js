@@ -34,7 +34,7 @@ const AddProductScreen = ({ navigation }) => {
     }, [])
   );
 
-  // ✅ Add Product Function
+  // ✅ Add Product Functio
  // ✅ Upload Image & Product Data
 const handleAddProduct = async () => {
   if (!image || !name || !title || !price) {
@@ -50,6 +50,7 @@ const handleAddProduct = async () => {
   formData.append("rating", rating);
   
   // ✅ Agar image URL hai to directly save karo, warna file upload karo
+  
   if (image.startsWith("http")) {
     formData.append("image", image);
   } else {
