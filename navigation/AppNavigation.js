@@ -12,7 +12,10 @@ import useAuthStore from "../store/authStore";
 import { ActivityIndicator, View } from "react-native";
 import SettingsScreen from "../screens/SettingsScreen";
 import DashboardScreen from "../screens/DashboardScreen";
+import ProductDetailsScreen from "../screens/ProductDetails";
 import ProductScreen from "../screens/ProductScreen";
+import OrderScreen from "../screens/OrderScreen";
+import ProductUpdateScreen from "../screens/ProductUpdateScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -21,35 +24,36 @@ const Tab = createBottomTabNavigator();
 const BottomTabs = () => {
   return (
     <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ color, size }) => {
-        let Icon;
-        switch (route.name) {
-          case "Home":
-            Icon = Home;
-            break;
-          case "Dashboard":
-            Icon = BarChart;
-            break;
-          case "Product":
-            Icon = Package;
-            break;
-          case "Settings":
-            Icon = Settings;
-            break;
-          case "Profile":
-            Icon = User;
-            break;
-          default:
-            return null;
-        }
-        return <Icon color={color} size={size} />;
-      },
-      tabBarStyle: { backgroundColor: "#121212" },
-      tabBarActiveTintColor: "#FFD700",
-      tabBarInactiveTintColor: "#888",
-    })}
-  >
+
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let Icon;
+          switch (route.name) {
+            case "Home":
+              Icon = Home;
+              break;
+            case "Dashboard":
+              Icon = BarChart;
+              break;
+            case "Product":
+              Icon = Package;
+              break;
+            case "Settings":
+              Icon = Settings;
+              break;
+            case "Profile":
+              Icon = User;
+              break;
+            default:
+              return null;
+          }
+          return <Icon color={color} size={size} />;
+        },
+        tabBarStyle: { backgroundColor: "#ffff" },
+        tabBarActiveTintColor: "#FFD700",
+        tabBarInactiveTintColor: "#888",
+      })}
+    >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Product" component={ProductScreen} />
@@ -84,9 +88,21 @@ const AppNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="ProtectedRoutes" component={ProtectedRoutes} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}  />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Order" component={OrderScreen} options={{
+          headerShown: true,   // ✅ Header show hoga
+          headerTitle: "🛒 Confirm Order", // ✅ Custom Title
+          headerStyle: { backgroundColor: "#121212" },  // ✅ Header Background Color
+          headerTitleStyle: { color: "#FFD700", fontSize: 20, fontWeight: "bold" },  // ✅ Title ka Color & Style
+          headerTintColor: "#FFD700",  // ✅ Back Button (Arrow) ka Color
+        }} />
+        <Stack.Screen name="Home" component={BottomTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="ProductUpdate" component={ProductUpdateScreen} options={{ headerShown: false }} />
+
+        
+        <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
